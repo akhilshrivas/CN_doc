@@ -1,0 +1,131 @@
+1. Read a CSV file
+
+from pyspark.sql import SparkSession
+
+spark = SparkSession.builder.appName("DataOps").getOrCreate()
+
+df = spark.read.csv("data.csv", header=True, inferSchema=True)
+df.show(5)
+---
+
+2. Rename column and row
+
+# Rename column
+df = df.withColumnRenamed("oldColumnName", "newColumnName")
+
+# Rename rows is not typical, but you can replace values in a column:
+df = df.withColumn("category", 
+                   F.when(F.col("category") == "old_value", "new_value")
+                   .otherwise(F.col("category")))
+
+
+---
+
+3. Add a new column
+
+from pyspark.sql import functions as F
+
+df = df.withColumn("new_col", F.lit("default_value"))  # constant column
+df = df.withColumn("double_salary", F.col("salary") * 2)  # calculated column
+
+
+---
+
+4. Filter a DataFrame
+
+df_filtered = df.filter(F.col("salary") > 50000)
+df_filtered.show()
+
+
+---
+
+5. Remove duplicates
+
+df_no_dup = df.dropDuplicates(["id"])   # based on column(s)
+
+
+---
+
+6. GroupBy in DataFrame
+
+df_grouped = df.groupBy("department").agg(
+    F.avg("salary").alias("avg_salary"),
+    F.count("*").alias("count")
+)
+df_grouped.show()
+
+
+---
+
+7. Merge (Join) two DataFrames
+
+df1 = spark.read.csv("employees.csv", header=True, inferSchema=True)
+df2 = spark.read.csv("departments.csv", header=True, inferSchema=True)
+
+merged_df = df1.join(df2, df1.dept_id == df2.id, "inner")
+merged_df.show()
+
+
+---
+
+8. Use of when / otherwise in PySpark
+
+df = df.withColumn("bonus", 
+                   F.when(F.col("salary") > 50000, 5000)
+                   .otherwise(1000))
+
+
+---
+
+9. Use of Window function
+
+from pyspark.sql.window import Window
+
+windowSpec = Window.partitionBy("department").orderBy(F.col("salary").desc())
+
+df = df.withColumn("rank", F.rank().over(windowSpec))
+df.show()
+
+
+---
+
+10. Partition using (write partitioned files)
+
+df.write.partitionBy("department").csv("output_partitioned", header=True)
+
+
+---
+
+11. Create a UDF
+
+from pyspark.sql.types import StringType
+from pyspark.sql.functions import udf
+
+def categorize_salary(sal):
+    return "High" if sal > 50000 else "Low"
+
+categorize_udf = udf(categorize_salary, StringType())
+
+df = df.withColumn("salary_category", categorize_udf(F.col("salary")))
+df.show()
+
+
+---
+
+12. Handle nulls
+
+# Drop rows with nulls
+df_drop = df.na.drop()
+
+# Fill nulls
+df_fill = df.na.fill({"salary": 0, "name": "Unknown"})
+
+# Replace null with another column value
+df = df.withColumn("salary", F.when(F.col("salary").isNull(), 0).otherwise(F.col("salary")))
+
+
+---
+
+✅ This covers all the tasks you asked: reading, renaming, adding, filtering, deduplicating, grouping, joining, conditional logic, windowing, partitioning, UDFs, and null handling.
+
+Do you want me to also combine all these steps into one complete example workflow with a sample dataset (so you can practice end-to-end)?
