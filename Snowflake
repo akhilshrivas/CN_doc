@@ -1,0 +1,22 @@
+Snowflake Overview
+
+Snowflake is a cloud-based data warehouse platform that allows organizations to store, process, and analyze large volumes of structured and semi-structured data. Unlike traditional data warehouses, Snowflake is built on a cloud-native architecture that separates storage and compute, making it highly scalable, flexible, and cost-efficient.
+
+Key Features:
+
+Separation of Storage and Compute: Scale storage and computing power independently.
+
+Multi-Cloud Support: Available on AWS, Azure, and Google Cloud.
+
+Performance: High-speed query execution with automatic optimization.
+
+Data Sharing: Securely share data across teams or organizations without duplication.
+
+Semi-Structured Data Support: Handles JSON, Avro, ORC, and Parquet formats.
+
+Security: End-to-end encryption, role-based access, and compliance with industry standards.
+
+
+Why Use Snowflake?
+
+Snowflake is widely used for data warehousing, business intelligence (BI), data lakes, and advanced analytics. It enables companies to process big data quickly and connect seamlessly with tools like Power BI, Tableau, or Python for reporting and machine learning.
