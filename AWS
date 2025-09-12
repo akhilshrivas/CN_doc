@@ -1,0 +1,59 @@
+Amazon Web Services (AWS) Overview
+
+Amazon Web Services (AWS) is a cloud computing platform that provides a wide range of services to help organizations build, deploy, and scale applications without managing physical hardware. AWS offers on-demand, pay-as-you-go resources, making it one of the most popular choices for cloud infrastructure.
+
+Key AWS Services:
+
+Amazon S3 (Simple Storage Service)
+
+Object storage service for storing files, backups, and big data.
+
+Used for data lakes, static website hosting, and archiving.
+
+
+Amazon EC2 (Elastic Compute Cloud)
+
+Virtual servers in the cloud to run applications.
+
+Provides scalable compute capacity.
+
+
+AWS Lambda
+
+Serverless compute service to run code without provisioning servers.
+
+Ideal for event-driven applications.
+
+
+Amazon RDS (Relational Database Service)
+
+Managed relational databases (MySQL, PostgreSQL, Oracle, SQL Server, etc.).
+
+Automated backups, scaling, and maintenance.
+
+
+Amazon VPC (Virtual Private Cloud)
+
+Allows you to create isolated networks in AWS.
+
+Controls security, IP ranges, and traffic.
+
+
+Amazon Athena
+
+Interactive query service to analyze data directly in Amazon S3 using SQL.
+
+No need to set up servers or ETL.
+
+
+AWS Glue
+
+Serverless data integration service for ETL (Extract, Transform, Load).
+
+Prepares and transforms data for analytics and machine learning.
+
+
+
+Why Use AWS?
+
+AWS is widely used because of its flexibility, scalability, security, and integration with tools for data engineering, analytics, and machine learning. It helps organizations reduce infrastructure costs while ensuring high availability.
