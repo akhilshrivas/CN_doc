@@ -1,1 +1,198 @@
-# Cloudnexus_doc
+Databricks Menu Breakdown
+
+1. + New
+
+Used to create new things: Notebooks, Jobs, Dashboards, SQL queries, Clusters.
+
+Example: You click + New → Notebook, choose Python, and start writing ETL code.
+
+---
+
+2. Workspace
+
+Your personal/project folder to store Notebooks, Folders, Libraries, and Dashboards.
+
+Think of it as a "Google Drive" for your Databricks work.
+
+Example: Store your ETL pipeline notebook in a folder called etl_project.
+
+---
+
+3. Recents
+
+Quick access to recently opened notebooks, queries, or dashboards.
+
+---
+
+4. Catalog
+
+Where you manage databases, tables, and data schemas.
+
+Connected to Unity Catalog (for permissions and governance).
+
+Example: You create a database sales_db, inside it a table orders stored in Delta format.
+
+
+CREATE DATABASE sales_db;
+CREATE TABLE sales_db.orders (
+  order_id INT,
+  customer_id INT,
+  amount DOUBLE
+);
+
+
+---
+
+5. Jobs & Pipelines
+
+Jobs → Automate and schedule notebooks, workflows, or ETL tasks.
+
+Pipelines → Handle Delta Live Tables (continuous ETL pipelines).
+
+Example: Run an ETL notebook every night at 12 AM to load fresh sales data from S3 into a Delta Table.
+
+---
+
+6. Compute
+
+Where you create/manage clusters (the Spark machines that run your code).
+
+Example: Create a cluster with 4 workers to process 100GB of customer logs.
+
+---
+
+7. Marketplace
+
+Lets you import external datasets, models, or partner solutions into your Databricks workspace.
+
+Example: Import a sample COVID dataset from Marketplace to test queries.
+
+---
+
+SQL Section
+
+8. SQL Editor
+
+Write and run SQL queries directly on your data (Delta tables, Parquet, etc.).
+
+Example:
+
+
+SELECT country, COUNT(*) AS total_customers
+FROM sales_db.customers
+GROUP BY country;
+---
+
+9. Queries
+
+Saved SQL queries that you or your team created.
+
+Example: Save a query monthly_sales and reuse it in dashboards.
+
+---
+
+10. Dashboards
+
+Build interactive dashboards from queries (like Power BI or Tableau inside Databricks).
+
+Example: Create a dashboard showing Total Sales by Region using a SQL query.
+
+---
+
+11. Genie
+
+AI-powered SQL assistant in Databricks.
+
+You type natural language: "Show me top 5 countries by sales" → it generates SQL for you.
+
+---
+
+12. Alerts
+
+Set alerts on query results.
+
+Example: Alert if "daily revenue < 10000" so finance team gets notified.
+
+---
+
+13. Query History
+
+Shows log of all SQL queries run by you and your team.
+
+Good for debugging or reviewing performance.
+
+---
+
+14. SQL Warehouses
+
+Serverless compute just for SQL queries (separate from Spark clusters).
+
+Example: You want to power dashboards with SQL queries → use SQL Warehouse instead of a full cluster.
+
+---
+
+Data Engineering Section
+
+15. Job Runs
+
+History of executed Jobs (scheduled ETL pipelines).
+
+Example: Yesterday’s nightly ETL failed → check here for logs.
+
+---
+
+16. Data Ingestion
+
+Tools to ingest data into Databricks (Auto Loader, Delta Live Tables, partner connectors).
+
+Example: Use Auto Loader to continuously load CSVs dropped into S3 into Delta tables.
+
+---
+
+AI/ML Section
+
+17. Playground
+
+Try out ML models quickly (often integrated with MLflow).
+
+Example: Test a pretrained sentiment analysis model on customer reviews.
+
+---
+
+18. Experiments
+
+Track ML experiments, hyperparameters, and metrics.
+
+Example: Train 3 versions of a Random Forest model → Experiments helps you compare results.
+
+---
+
+19. Features
+
+Manage feature store (reusable ML features for models).
+
+Example: A "customer_lifetime_value" feature can be reused in multiple ML models.
+
+---
+
+20. Models
+
+Register and manage ML models (with versioning).
+
+Example: Store fraud_detection_model v1.0 and later deploy v2.0.
+
+---
+
+✅ Summary in Simple Terms
+
+Workspace/Compute → Where you create/run code.
+
+Catalog → Where your data (tables/databases) lives.
+
+Jobs & Pipelines → Automate ETL.
+
+SQL Section → Analyze data & build dashboards.
+
+Data Engineering → Handle ingestion + job runs.
+
+AI/ML → Train, track, and deploy ML models.
