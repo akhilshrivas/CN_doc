@@ -53,6 +53,111 @@ Serverless data integration service for ETL (Extract, Transform, Load).
 Prepares and transforms data for analytics and machine learning.
 
 
+--Quick Revision--
+1. Amazon S3 (Simple Storage Service)
+
+Think of S3 as a giant online hard drive where you can store unlimited files (called objects) inside buckets.
+
+Real-life example:
+Imagine Google Drive, but for companies. A media company stores all their videos in S3. Netflix-like platforms can stream movies directly from it.
+
+Use case in data engineering: Store raw CSV logs from your app in S3, then later query or process them.
+---
+
+2. Amazon Athena
+
+Athena is a serverless query engine that lets you run SQL queries directly on data stored in S3. No database setup needed.
+
+Real-life example:
+Suppose you have millions of e-commerce sales logs in S3. Instead of loading into MySQL, you can query directly with Athena:
+
+SELECT region, SUM(sales) 
+FROM s3_sales_data 
+GROUP BY region;
+
+You pay only for the data scanned. Like opening a huge Excel file in the cloud and filtering rows instantly.
+---
+
+3. AWS Lambda
+
+Lambda is serverless compute — you run small pieces of code without worrying about servers. It only runs when triggered.
+
+Real-life example:
+When someone uploads a photo to S3, Lambda automatically resizes it into a thumbnail.
+
+In data pipelines: A Lambda function triggers when new data lands in S3 → cleans data → sends it to Glue for ETL.
+---
+
+4. Amazon EC2 (Elastic Compute Cloud)
+
+EC2 is basically renting a computer (server) in the cloud. You decide CPU, memory, OS, etc.
+
+Real-life example:
+A startup hosts their website on an EC2 server instead of buying a physical machine.
+
+For data engineers: You can spin up a heavy EC2 instance to run Spark jobs or ML training.
+---
+
+5. Amazon CloudWatch
+
+CloudWatch is like a CCTV + alarm system for your AWS resources. It monitors logs, performance, and sends alerts.
+
+Real-life example:
+If your EC2 server CPU usage goes above 80%, CloudWatch sends you an alert on email/SMS.
+
+In pipelines: Monitor Lambda errors, Glue job failures, or S3 storage usage.
+---
+
+6. AWS Glue
+
+Glue is a serverless ETL (Extract, Transform, Load) service. It helps clean, transform, and move data.
+
+Real-life example:
+A retail company collects sales data from multiple stores in different formats. Glue automatically detects schema, cleans null values, and stores it in a structured format for analysis.
+
+Often used with S3 + Athena → (S3 raw → Glue cleans → Athena queries).
+---
+
+7. AWS IAM (Identity and Access Management)
+
+IAM is like the security guard of AWS. It controls who can do what.
+
+Real-life example:
+In a company:
+
+Data analyst only gets read-only access to S3.
+
+Data engineer can run Glue jobs.
+
+Admin has full control.
+
+
+Without IAM, everyone would have keys to the bank vault.
+---
+
+How they work together in a pipeline:
+
+1. Data lands in S3 (raw logs).
+
+
+2. A Lambda function triggers on new files → does some quick filtering.
+
+
+3. Glue cleans and organizes the data into tables.
+
+
+4. Analysts run SQL queries on it with Athena.
+
+
+5. All resources are secured with IAM roles.
+
+
+6. CloudWatch monitors errors and sends alerts.
+
+
+7. If needed, an EC2 instance runs heavier ML models on that data.
+8.
+
 
 Why Use AWS?
 
