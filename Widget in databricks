@@ -1,0 +1,85 @@
+Input widgets allow you to add parameters to your notebooks and dashboards. You can add a widget from the Databricks UI or using the widget API. 
+To add or edit a widget, you must have CAN EDIT permissions on the notebook.
+Databricks widgets are best for:
+
+Building a notebook or dashboard that is re-executed with different parameters.
+Quickly exploring results of a single query with different parameters.
+
+Databricks widget types
+There are 4 types of widgets:
+
+text: Input a value in a text box.
+dropdown: Select a value from a list of provided values.
+combobox: Combination of text and dropdown. Select a value from a provided list or input one in the text box.
+multiselect: Select one or more values from a list of provided values.
+Create widgets with SQL, Python, R, and Scala
+Programmatically create widgets in a notebook attached to a compute cluster.
+
+The widget API is designed to be consistent in Scala, Python, and R. The widget API in SQL is slightly different but equivalent to the other languages.
+You manage widgets through the Databricks Utilities (dbutils) reference interface.
+
+The first argument for all widget types is name. This is the name you use to access the widget.
+The second argument is defaultValue, the widget's default setting.
+The third argument for all widget types (except text) is choices, a list of values the widget can take on. This argument is not used for text type widgets.
+The last argument is label, an optional value for the label shown over the widget text box or dropdown.
+Python
+Scala
+R
+SQL
+Python
+dbutils.widgets.dropdown("state", "CA", ["CA", "IL", "MI", "NY", "OR", "VA"])
+
+You can access the current value of the widget or get a mapping of all widgets:
+Scala,R,SQL,
+Python code-
+dbutils.widgets.get("state")
+
+dbutils.widgets.getAll()
+
+Finally, you can remove a widget or all widgets in a notebook:
+
+Python,Scala,R,SQL
+dbutils.widgets.remove("state")
+
+dbutils.widgets.removeAll()
+
+Use widget values in Spark SQL and SQL Warehouse
+Spark SQL and SQL Warehouse access widget values using parameter markers. Parameter markers protect your code from SQL injection attacks by clearly separating provided values from the SQL statements.
+
+Parameter markers for widgets is available in Databricks Runtime 15.2 and above. Previous versions of Databricks Runtime should use the old syntax for DBR 15.1 and below.
+
+You can access widgets defined in any language from Spark SQL while executing notebooks interactively. Consider the following workflow:
+
+Create a dropdown widget of all databases in the current catalog:
+
+Python
+dbutils.widgets.dropdown("database", "default", [database[0] for database in spark.catalog.listDatabases()])
+
+
+Create a text widget to manually specify a table name:
+
+Python
+dbutils.widgets.text("table", "")
+
+Run a SQL query to see all tables in a database (selected from the dropdown list):
+
+SQL
+SHOW TABLES IN IDENTIFIER(:database)
+
+note
+You must use the SQL IDENTIFIER() clause to parse strings as object identifiers such names for databases, tables, views, functions, columns, and fields.
+
+Manually enter a table name into the table widget.
+
+Create a text widget to specify a filter value:
+
+Python
+dbutils.widgets.text("filter_value", "")
+
+Preview the contents of a table without needing to edit the contents of the query:
+
+SQL
+SELECT *
+FROM IDENTIFIER(:database || '.' || :table)
+WHERE col == :filter_value
+LIMIT 100
