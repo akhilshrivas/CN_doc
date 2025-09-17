@@ -1,0 +1,4 @@
+Streaming data is data that is emitted at high volume in a continuous, incremental manner with the goal of low-latency processing. 
+Organizations have thousands of data sources that typically simultaneously emit messages, records, or data ranging in size from a few bytes to several megabytes (MB). 
+Streaming data includes location, event, and sensor data that companies use for real-time analytics and visibility into many aspects of their business. 
+For example, companies can track changes in public sentiment on their brands and products by continuously analyzing clickstream and customer posts from social media streams then responding promptly as needed.
