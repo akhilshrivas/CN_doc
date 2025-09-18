@@ -1,0 +1,65 @@
+Kafka comes with .bat files inside the bin\windows folder, so you’ll be running commands in PowerShell or Command Prompt.
+---
+
+Step 1: Extract Kafka
+
+Unzip the Kafka file (e.g., kafka_2.13-3.5.0.tgz) using 7-Zip or WinRAR.
+
+Move the extracted folder somewhere easy, like:
+
+C:\kafka
+---
+
+Step 2: Start Zookeeper
+
+Kafka still needs Zookeeper (unless you configure KRaft mode).
+Open PowerShell → go inside your Kafka folder:
+
+cd C:\kafka
+.\bin\windows\zookeeper-server-start.bat .\config\zookeeper.properties
+
+Keep this window open.
+---
+
+Step 3: Start Kafka Broker
+
+Open a new PowerShell window, then run:
+
+cd C:\kafka
+.\bin\windows\kafka-server-start.bat .\config\server.properties
+
+Keep this window open too. Now Kafka is running on localhost:9092.
+---
+
+Step 4: Create a Topic
+
+Open a new PowerShell window and run:
+
+cd C:\kafka
+.\bin\windows\kafka-topics.bat --create --topic test-topic --bootstrap-server localhost:9092 --partitions 1 --replication-factor 1
+
+Check if it exists:
+
+.\bin\windows\kafka-topics.bat --list --bootstrap-server localhost:9092
+---
+
+Step 5: Produce Data (Send Messages)
+
+Still in PowerShell:
+
+cd C:\kafka
+.\bin\windows\kafka-console-producer.bat --topic test-topic --bootstrap-server localhost:9092
+
+Now type a few messages and hit Enter after each one.
+---
+
+Step 6: Consume Data (Read Messages)
+
+Open another PowerShell window:
+
+cd C:\kafka
+.\bin\windows\kafka-console-consumer.bat --topic test-topic --bootstrap-server localhost:9092 --from-beginning
+
+You’ll see all the messages you typed appear here in real-time.
+---
+Producer → Topic → Consumer
