@@ -1,0 +1,135 @@
+1. What is Scala?
+
+Scala = “Scalable Language”
+
+It runs on the JVM (Java Virtual Machine) → so you can use Java libraries.
+
+Supports both Object-Oriented Programming (OOP) and Functional Programming (FP).
+
+Used in big data (Apache Spark), backend systems, and concurrent apps.
+
+2. Basic Syntax
+Hello World
+object HelloWorld {
+  def main(args: Array[String]): Unit = {
+    println("Hello, Scala!")
+  }
+}
+
+
+object → singleton object (no static like Java).
+
+def → define a function.
+
+Unit → like void in Java (no return value).
+
+3. Variables
+
+Scala has two types of variables:
+
+val name: String = "Akhil"   // Immutable (cannot change)
+var age: Int = 21            // Mutable (can change)
+
+
+val = constant (preferred).
+
+var = variable (use only if needed).
+
+Type inference works too:
+
+val city = "Bhopal"   // Scala infers String
+var number = 10       // Scala infers Int
+
+4. Data Types
+
+Numbers: Int, Double, Float, Long
+
+String: "hello"
+
+Boolean: true / false
+
+Collections: List, Set, Map
+
+Example:
+
+val nums: List[Int] = List(1, 2, 3, 4)
+val unique: Set[Int] = Set(1, 2, 2, 3) // duplicates removed
+val capitals: Map[String, String] = Map("India" -> "Delhi", "UK" -> "London")
+
+5. Control Structures
+val x = 10
+
+if (x > 5) {
+  println("Greater than 5")
+} else {
+  println("Less or equal to 5")
+}
+
+// Loop
+for (i <- 1 to 5) {
+  println(i)
+}
+
+// While
+var n = 3
+while (n > 0) {
+  println(n)
+  n -= 1
+}
+
+6. Functions
+def add(a: Int, b: Int): Int = {
+  a + b
+}
+
+println(add(5, 3))  // 8
+
+
+Short version:
+
+def add(a: Int, b: Int) = a + b
+
+
+Anonymous function:
+
+val square = (x: Int) => x * x
+println(square(5))  // 25
+
+7. Classes & Objects
+class Person(val name: String, var age: Int)
+
+val p = new Person("Akhil", 21)
+println(p.name)  // Akhil
+println(p.age)   // 21
+
+8. Case Classes
+
+Used for immutable data, automatically provides equals, toString, etc.
+
+case class Student(name: String, age: Int)
+
+val s1 = Student("Akhil", 21)
+println(s1)   // Student(Akhil,21)
+
+9. Pattern Matching (like switch but more powerful)
+val num = 2
+num match {
+  case 1 => println("One")
+  case 2 => println("Two")
+  case _ => println("Other")
+}
+
+10. Functional Programming Features
+val numbers = List(1, 2, 3, 4, 5)
+
+// map
+val squares = numbers.map(x => x * x)
+println(squares)  // List(1,4,9,16,25)
+
+// filter
+val evens = numbers.filter(_ % 2 == 0)
+println(evens)   // List(2,4)
+
+// reduce
+val sum = numbers.reduce(_ + _)
+println(sum)     // 15
