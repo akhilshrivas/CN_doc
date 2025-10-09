@@ -14,3 +14,18 @@ SAS is widely used in banking, healthcare, insurance, and government sectors bec
 **You can access the sas university edition by this link also you can practice here sample data will already here
 https://www.sas.com/en_in/software/studio.html then use use the link named sas on demand signed in again there and there is named launch sas studio open it and start practice on it.**
 
+SAS data - infromat
+>informats tell to read a variable.
+>every variable in any sas dattaset will have an informat.
+>there arre three main classes of infromats: char, num, & date
+
+SAS DATE 
+>date in SAS are represented in a special way.
+>SAS date= =number of days since jauary 1, 1960
+
+SAS in informat
+>fromats tell SAS how to display the values in the variable.
+>formats can be grouped three classes(character, numeric, and date-time)
+>the general form of a formats statemnt is 
+FORMAT variable-name FORMAT-NAME;
+
