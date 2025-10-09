@@ -1,0 +1,13 @@
+SAS (Statistical Analysis System) is a powerful data analytics and statistical software suite developed by SAS Institute.
+It’s mainly used for:
+
+Data management (cleaning, transforming, and organizing data)
+
+Advanced analytics (statistical modeling, forecasting, machine learning)
+
+Business Intelligence (BI) and reporting
+
+Data integration and ETL (Extract, Transform, Load)
+
+SAS is widely used in banking, healthcare, insurance, and government sectors because of its robust data handling, security, and reliability for large-scale enterprise data.
+
