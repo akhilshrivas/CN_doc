@@ -1,0 +1,70 @@
+Simple Example
+
+Let’s say we have a data lake on Amazon S3, and we use Apache Spark to manage an Iceberg table.
+
+Step 1: Create an Iceberg Table
+from pyspark.sql import SparkSession
+
+spark = SparkSession.builder \
+    .appName("IcebergExample") \
+    .config("spark.sql.catalog.local", "org.apache.iceberg.spark.SparkCatalog") \
+    .config("spark.sql.catalog.local.type", "hadoop") \
+    .config("spark.sql.catalog.local.warehouse", "s3://my-bucket/warehouse/") \
+    .getOrCreate()
+
+# Create a table
+spark.sql("""
+CREATE TABLE local.db.customers (
+    id BIGINT,
+    name STRING,
+    city STRING,
+    age INT
+) USING iceberg
+""")
+
+Step 2: Insert Data
+spark.sql("""
+INSERT INTO local.db.customers VALUES
+(1, 'Akhil', 'Bhopal', 22),
+(2, 'Ravi', 'Indore', 25)
+""")
+
+
+This creates a new snapshot of the table with two records.
+
+Step 3: Query the Table
+spark.sql("SELECT * FROM local.db.customers").show()
+
+
+Output:
+
++---+------+--------+---+
+|id |name  |city    |age|
++---+------+--------+---+
+| 1 |Akhil |Bhopal  |22 |
+| 2 |Anup  |Indore  |25 |
++---+------+--------+---+
+
+Step 4: Time Travel
+
+You can query an older snapshot of the table:
+
+spark.sql("""
+SELECT * FROM local.db.customers
+VERSION AS OF 1
+""")
+
+
+This lets you see the data as it was before updates or deletions — useful for auditing and debugging.
+
+Real-World Use Case
+
+Netflix, Adobe, and LinkedIn use Iceberg at scale.
+
+Common scenarios:
+
+Data lakes where analysts need consistent, queryable data.
+
+Slowly changing data (you want updates without rewriting entire partitions).
+
+Multi-engine environments (Spark + Trino + Flink all reading same table).
