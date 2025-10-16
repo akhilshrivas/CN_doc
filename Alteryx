@@ -1,0 +1,141 @@
+Alteryx is a data analytics and automation platform used to:
+
+Collect data from multiple sources
+
+Clean and transform it
+
+Analyze and visualize it
+
+Automate workflows without writing code
+
+It’s often described as “Excel + SQL + Python + Automation combined in one tool”, but with a drag-and-drop interface.
+
+🎯 Why We Use Alteryx
+
+Organizations use Alteryx because it:
+
+Saves time — no manual Excel cleaning or scripting.
+
+Automates workflows — run daily/weekly data updates automatically.
+
+Handles large data easily — much faster than Excel.
+
+Connects to everything — Excel, databases, APIs, cloud services, etc.
+
+Supports advanced analytics — predictive models, spatial analysis, machine learning.
+
+⚙️ How It Works
+
+Alteryx is built around workflows.
+A workflow is like a pipeline of connected tools that process data step by step.
+
+Each tool in Alteryx performs one function — like input, filter, join, or summarize.
+You drag tools from the menu onto the canvas and connect them visually.
+
+🧱 Core Tool Categories
+Category	Examples of Tools	Purpose
+Input/Output	Input Data, Output Data	Load or export files, databases
+Preparation	Select, Filter, Formula, Data Cleansing	Clean, filter, and modify data
+Join	Join, Union	Combine multiple datasets
+Transform	Summarize, Transpose, Cross Tab	Aggregate or pivot data
+Parse	Text To Columns, Regex	Split or extract text data
+Reporting	Table, Chart, Render	Create visual or PDF reports
+Predictive	Linear Regression, Decision Tree	Build and score models
+Spatial	Create Points, Distance	Geographic and mapping analysis
+🧠 Example: SuperStore Sales Analysis
+
+Let’s walk through a real example using your SuperStore Sales dataset.
+
+🎯 Goal:
+
+Find total sales and profit by region and category, and export the cleaned summary to Excel.
+
+🧩 Step-by-step Workflow
+Step 1: Input Data
+
+Tool: Input Data
+
+Action: Load your Excel file SuperStore Sales DataSet.xlsx
+
+Path: Input Data → [Browse file] → Select sheet (Orders)
+
+Step 2: Select Columns
+
+Tool: Select
+
+Action: Keep only these:
+
+Order Date, Sales, Profit, Category, Region
+
+Tip: Rename columns if needed.
+
+Step 3: Clean Data
+
+Tool: Data Cleansing
+
+Action: Remove null values, trim spaces from text.
+
+Step 4: Create Year Field
+
+Tool: Formula
+
+Expression:
+
+DateTimeYear([Order Date])
+
+
+Name this new field as Year.
+
+Step 5: Summarize Sales
+
+Tool: Summarize
+
+Group by: Region, Category
+
+Sum: Sales
+
+Sum: Profit
+
+This gives you total sales and profit per region and category.
+
+Step 6: Sort
+
+Tool: Sort
+
+Action: Sort by Sales in descending order.
+
+Step 7: Output
+
+Tool: Output Data
+
+Action: Export result to:
+
+C:\Users\Akhil\Documents\SuperStore_Summary.xlsx
+
+📊 Output Example
+Region	Category	Total Sales	Total Profit
+East	Technology	₹120,000	₹25,000
+West	Furniture	₹98,000	₹12,000
+Central	Office Supplies	₹86,000	₹9,000
+🔄 Real-World Value
+
+You can schedule this workflow to run daily or weekly.
+If the Excel file updates automatically (e.g., from a database), Alteryx can:
+
+Load the new data
+
+Clean and summarize it
+
+Save or email the updated report — without any manual work.
+
+🧩 Bonus: What You Can Learn Next
+
+After mastering this:
+
+Try Joins → combine customer and sales sheets.
+
+Try Filter → separate profitable vs. loss orders.
+
+Try Predictive Tools → build a regression model to predict profit.
+
+Try Reporting Tools → generate automated PDF summaries.
